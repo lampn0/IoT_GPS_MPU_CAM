@@ -1,0 +1,692 @@
+[
+    {
+        "id": "701e8f4a7f22426a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "599740b7.efde9",
+        "type": "http response",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 500,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1618a829.76f638",
+        "type": "json",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "d0089cc7.d25ac"
+            ]
+        ]
+    },
+    {
+        "id": "c7410fa2.1c2fa",
+        "type": "debug",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "75a22f74.f1aba",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "2b7ac01b.fc984",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sensor Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 940,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d0089cc7.d25ac",
+        "type": "function",
+        "z": "701e8f4a7f22426a",
+        "name": "JSON or URL Encoded",
+        "func": "var msg0 = { payload: msg.payload.api_key };\nvar msg1 = { payload: msg.payload.sensor };\nvar msg2 = { payload: msg.payload.lat };\nvar msg3 = { payload: msg.payload.lng };\nvar msg4 = { payload: msg.payload.speed };\nvar msg5 = { payload: msg.payload.sat };\nvar msg6 = { payload: msg.payload.alt };\n\nreturn [msg0, msg1, msg2, msg3, msg4, msg5, msg6];",
+        "outputs": 7,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 560,
+        "wires": [
+            [
+                "c7410fa2.1c2fa"
+            ],
+            [
+                "75a22f74.f1aba"
+            ],
+            [
+                "5887648405e86200"
+            ],
+            [
+                "6f8b2078eb0e8dbf"
+            ],
+            [
+                "abd2f992e49adbf5"
+            ],
+            [
+                "9ba4aa27c79dd547"
+            ],
+            [
+                "b136f13fb4cb34a4"
+            ]
+        ]
+    },
+    {
+        "id": "5d9ab0d2.66b92",
+        "type": "http in",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "url": "update-gps",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 491,
+        "wires": [
+            [
+                "599740b7.efde9",
+                "c7410fa2.1c2fa",
+                "1618a829.76f638"
+            ]
+        ]
+    },
+    {
+        "id": "7f5cf345.63f56c",
+        "type": "http response",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 620,
+        "y": 171,
+        "wires": []
+    },
+    {
+        "id": "6530621.95b429c",
+        "type": "http in",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "url": "/get-sensor",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 351,
+        "wires": [
+            [
+                "9471d1a0.68588"
+            ]
+        ]
+    },
+    {
+        "id": "5ddc9f47.4b555",
+        "type": "http response",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 620,
+        "y": 311,
+        "wires": []
+    },
+    {
+        "id": "9471d1a0.68588",
+        "type": "function",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "func": "msg.payload = {\"value1\":24.25, \"value2\":49.54, \"value3\":1005.14};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 351,
+        "wires": [
+            [
+                "5ddc9f47.4b555",
+                "13aea59.7430e5a"
+            ]
+        ]
+    },
+    {
+        "id": "13aea59.7430e5a",
+        "type": "debug",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 379,
+        "wires": []
+    },
+    {
+        "id": "e71c7a7d.e7c598",
+        "type": "debug",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 251,
+        "wires": []
+    },
+    {
+        "id": "c7807102.3f433",
+        "type": "http in",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "url": "/update-sensor",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 211,
+        "wires": [
+            [
+                "60410cde.562a34"
+            ]
+        ]
+    },
+    {
+        "id": "60410cde.562a34",
+        "type": "function",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "func": "msg.payload = msg.payload.temperature;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 211,
+        "wires": [
+            [
+                "e71c7a7d.e7c598",
+                "7f5cf345.63f56c"
+            ]
+        ]
+    },
+    {
+        "id": "5887648405e86200",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "2b7ac01b.fc984",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Lat",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "6f8b2078eb0e8dbf",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "2b7ac01b.fc984",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Lng",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9ba4aa27c79dd547",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "2b7ac01b.fc984",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sat",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "abd2f992e49adbf5",
+        "type": "ui_gauge",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Speed",
+        "label": "km/h",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "b136f13fb4cb34a4",
+        "type": "ui_gauge",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Alt",
+        "label": "m",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "ed15da4f3b209409",
+        "type": "http response",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 500,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "56d9a3e386850b0a",
+        "type": "json",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 490,
+        "y": 900,
+        "wires": [
+            [
+                "75c2b6e444708a0c"
+            ]
+        ]
+    },
+    {
+        "id": "145aacc2d30c6484",
+        "type": "debug",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 930,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "79f2643f41f41b54",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sensor Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 940,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "75c2b6e444708a0c",
+        "type": "function",
+        "z": "701e8f4a7f22426a",
+        "name": "JSON or URL Encoded",
+        "func": "var msg0 = { payload: msg.payload.api_key };\nvar msg1 = { payload: msg.payload.sensor };\nvar msg2 = { payload: msg.payload.accx };\nvar msg3 = { payload: msg.payload.accy };\nvar msg4 = { payload: msg.payload.accz };\nvar msg5 = { payload: msg.payload.gyrox };\nvar msg6 = { payload: msg.payload.gyroy };\nvar msg7 = { payload: msg.payload.gyroz };\nvar msg8 = { payload: msg.payload.temperature };\n\nreturn [msg0, msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8];",
+        "outputs": 9,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 900,
+        "wires": [
+            [
+                "145aacc2d30c6484"
+            ],
+            [
+                "79f2643f41f41b54"
+            ],
+            [
+                "d8b1b6ad4db4e449"
+            ],
+            [
+                "5b8a6ea844c44207"
+            ],
+            [
+                "ca540bea7828d420"
+            ],
+            [
+                "9ab4de8dd56745a5"
+            ],
+            [
+                "c63e78e89b115607"
+            ],
+            [
+                "270f0dad6d9162ea"
+            ],
+            [
+                "4ee307f28a2eaf60"
+            ]
+        ]
+    },
+    {
+        "id": "7f3c797eb5cdb175",
+        "type": "http in",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "url": "update-mcu",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 831,
+        "wires": [
+            [
+                "ed15da4f3b209409",
+                "145aacc2d30c6484",
+                "56d9a3e386850b0a"
+            ]
+        ]
+    },
+    {
+        "id": "d8b1b6ad4db4e449",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Acceleration X",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 940,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "5b8a6ea844c44207",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Acceleration Y",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 940,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "4ee307f28a2eaf60",
+        "type": "ui_gauge",
+        "z": "701e8f4a7f22426a",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 930,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "ca540bea7828d420",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Acceleration Z",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 940,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "9ab4de8dd56745a5",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Gyro X",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 920,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "c63e78e89b115607",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Gyro Y",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "270f0dad6d9162ea",
+        "type": "ui_text",
+        "z": "701e8f4a7f22426a",
+        "group": "968ecc991c9829d2",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Gyro Z",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "2b7ac01b.fc984",
+        "type": "ui_group",
+        "name": "GPS",
+        "tab": "99ab8dc5.f435c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "968ecc991c9829d2",
+        "type": "ui_group",
+        "name": "MCU",
+        "tab": "99ab8dc5.f435c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "99ab8dc5.f435c",
+        "type": "ui_tab",
+        "name": "HTTP",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
